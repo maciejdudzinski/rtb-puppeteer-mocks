@@ -1,5 +1,6 @@
 const argv = require('yargs').argv
 const { sleep } = require('./util')
+const { exec } = require("child_process");
 const { ViewPage } = require('./pom/ViewPage')
 
 const URL = argv._[0];
@@ -23,6 +24,24 @@ const createTab = async (id) => {
     await tab.turnOffAudio();
   }
 }
+
+function printCpu() {
+  exec("top -b -n2 | grep \"Cpu(s)\"|tail -n 1 | awk '{print $2 + $4}'", (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      return;
+    }
+    console.log(`CPU: ${stdout}`);
+
+    setTimeout(printCpu, 1000);
+  });
+}
+
+printCpu();
 
 ;(async function() {
   await Promise.all((Array.from(new Array(TABS))).map((el, i) => createTab(i)))
