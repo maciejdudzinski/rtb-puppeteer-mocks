@@ -1,23 +1,23 @@
-const yargs = require('yargs')
+const argv = require('yargs').argv
 const { sleep } = require('./util')
 const { ViewPage } = require('./pom/ViewPage')
 
-const ID = yargs.argv.id;
-const TABS = yargs.argv.n;
+const URL = argv._[0];
+const TABS = argv.n;
 
-const PATH = `/play/${ID}`
-
-console.log(`Starting on: ${PATH} with ${TABS} tabs`);
+console.log(`Starting on: ${URL} with ${TABS} tabs`);
 
 const createTab = async (id) => {
-  const tab = await new ViewPage(PATH).launch()
+  const tab = await new ViewPage(URL).launch()
 
   await sleep(1000)
   await tab.toggleVideo()
   await sleep(1000)
   await tab.enterName(`Alfredo #${id}`)
   await tab.joinViewing()
-  await tab.turnOffAudio()
+  if (argv.audio !== false) {
+    await tab.turnOffAudio();
+  }
 }
 
 ;(async function() {

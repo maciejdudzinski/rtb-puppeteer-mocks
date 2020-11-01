@@ -1,13 +1,14 @@
+const argv = require('yargs').argv
 const puppeteer = require('puppeteer')
 
 class POMPage {
   browser
-  path
+  url
   page
   response
 
-  constructor(path) {
-    this.path = path
+  constructor(url) {
+    this.url = url
   }
 
   async launch() {
@@ -18,7 +19,7 @@ class POMPage {
         '--autoplay-policy=no-user-gesture-required',
         '--use-fake-device-for-media-stream',
         `--use-file-for-fake-video-capture=${process.cwd()}/assets/pacino.mjpeg`,
-        `--use-file-for-fake-audio-capture=${process.cwd()}/assets/pacino.wav`,
+        `--use-file-for-fake-audio-capture=${process.cwd()}/assets/${ argv.audio === false ? 'silent' : 'pacino'}.wav`,
         '--use-fake-ui-for-media-stream',
         '--enable-features=NetworkService'
       ],
@@ -27,9 +28,8 @@ class POMPage {
     })
 
     this.page = await this.browser.newPage()
-    const url = `http://${process.env.TARGET_DOMAIN}${this.path}`
 
-    this.response = await this.page.goto(url)
+    this.response = await this.page.goto(this.url)
 
     return this
   }
