@@ -8,6 +8,10 @@ const TABS = argv.n;
 console.log(`Starting on: ${URL} with ${TABS} tabs`);
 
 const createTab = async (id) => {
+  if (argv.delay) {
+    await sleep(id * argv.delay);
+  }
+  console.log(`adding tab ${id}`);
   const tab = await new ViewPage(URL).launch()
 
   await sleep(1000)
