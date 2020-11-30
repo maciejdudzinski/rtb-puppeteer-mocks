@@ -28,6 +28,7 @@ class POMPage {
     })
 
     this.page = await this.browser.newPage()
+    await this.page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/87.0.4272.0 Safari/537.36');
 
     this.response = await this.page.goto(this.url)
 

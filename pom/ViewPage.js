@@ -7,7 +7,7 @@ class ViewPage extends POMPage {
   async getJoiningButton() {
     const $document = await getDocument(this.page)
 
-    return queries.getByText($document, 'Join session')
+    return queries.getByText($document, 'Join the game')
   }
 
   async joinViewing() {
@@ -40,7 +40,7 @@ class ViewPage extends POMPage {
   async enterName(name) {
     const $document = await getDocument(this.page)
 
-    const toggle = await queries.getByLabelText($document, 'Enter your name')
+    const toggle = await queries.getByLabelText($document, 'Nickname')
 
     await toggle.type(name)
   }

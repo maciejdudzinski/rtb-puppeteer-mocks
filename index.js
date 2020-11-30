@@ -4,7 +4,7 @@ const { exec } = require("child_process");
 const { ViewPage } = require('./pom/ViewPage')
 
 const URL = argv._[0];
-const TABS = argv.n;
+const TABS = argv.n || 1;
 
 console.log(`Starting on: ${URL} with ${TABS} tabs`);
 
@@ -15,6 +15,9 @@ const createTab = async (id) => {
   console.log(`adding tab ${id}`);
   const tab = await new ViewPage(URL).launch()
 
+  const userAgent = await tab.page.evaluate(() => navigator.userAgent );
+
+  console.log(userAgent);
   await sleep(1000)
   await tab.toggleVideo()
   await sleep(1000)
