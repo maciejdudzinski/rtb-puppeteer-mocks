@@ -19,8 +19,6 @@ const createTab = async (id) => {
 
   console.log(userAgent);
   await sleep(1000)
-  await tab.toggleVideo()
-  await sleep(1000)
   await tab.enterName(`Alfredo #${id}`)
   await tab.joinViewing()
   if (argv.audio !== false) {
