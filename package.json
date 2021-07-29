@@ -1,0 +1,24 @@
+{
+  "name": "rtb-puppeteer-mocks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maciejdudzinski/rtb-puppeteer-mocks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maciejdudzinski/rtb-puppeteer-mocks/issues"
+  },
+  "homepage": "https://github.com/maciejdudzinski/rtb-puppeteer-mocks#readme",
+  "description": "",
+  "dependencies": {
+    "pptr-testing-library": "^0.6.5",
+    "puppeteer": "^10.1.0",
+    "yargs": "^17.0.1"
+  }
+}
