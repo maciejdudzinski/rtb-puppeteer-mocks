@@ -21,6 +21,10 @@ const createTab = async (id) => {
   await sleep(1000)
   await tab.enterName(`Alfredo #${id}`)
   await tab.joinViewing()
+
+  await tab.page.evaluate(_ => {
+    document.body.style.display = 'none';
+  });
 }
 
 function printCpu() {

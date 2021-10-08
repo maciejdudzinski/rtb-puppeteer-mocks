@@ -21,6 +21,7 @@ class POMPage {
         `--use-file-for-fake-video-capture=${process.cwd()}/assets/pacino.mjpeg`,
         `--use-file-for-fake-audio-capture=${process.cwd()}/assets/${ argv.audio === false ? 'silent' : 'pacino'}.wav`,
         '--use-fake-ui-for-media-stream',
+        '--mute-audio',
         '--enable-features=NetworkService'
       ],
       slowMo: process.env.DEBUG ? 20 : undefined,
@@ -31,7 +32,6 @@ class POMPage {
     await this.page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/87.0.4272.0 Safari/537.36');
 
     this.response = await this.page.goto(this.url)
-
     return this
   }
 
