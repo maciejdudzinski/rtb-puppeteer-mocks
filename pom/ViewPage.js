@@ -40,7 +40,9 @@ class ViewPage extends POMPage {
   async enterName(name) {
     const $document = await getDocument(this.page)
 
-    const toggle = await queries.getByLabelText($document, 'Nickname')
+    await this.page.waitForSelector('[aria-label="Nickname"]')
+
+    const toggle = await queries.getByPlaceholderText($document, 'Enter your nickname (max. 10 characters)')
 
     await toggle.type(name)
   }
